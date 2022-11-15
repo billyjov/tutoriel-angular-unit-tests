@@ -8,6 +8,9 @@ describe('AppComponent', () => {
         AppComponent
       ],
     }).compileComponents();
+
+    console.log('HELLO');
+
   });
 
   it('should create the app', () => {
@@ -27,5 +30,9 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.content span')?.textContent).toContain('unit-test app is running!');
+  });
+
+  it('should', () => {
+    expect(true).toBe(true);
   });
 });
