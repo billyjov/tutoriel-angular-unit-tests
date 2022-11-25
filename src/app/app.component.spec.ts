@@ -19,6 +19,19 @@ describe('AppComponent', () => {
 
   });
 
+  it('changeAge() should change correctly', () => {
+    expect(app.age).toBe(1);
+
+    app.changeAge();
+
+    expect(app.age).toBe(12);
+  });
+
+  it('name() should be a string', () => {
+    expect(app.name).not.toBeInstanceOf(Number);
+    expect(app.name).toBe('coulisses learn');
+  });
+
   it('should create the app', () => {
     expect(app).toBeTruthy();
   });
