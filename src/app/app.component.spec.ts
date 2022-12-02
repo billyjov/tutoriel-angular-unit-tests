@@ -46,13 +46,21 @@ describe('AppComponent', () => {
     expect(3).toBeCorrect()
   });
 
-  it('changeAge() should change correctly', () => {
-    expect(app.age).toBe(1);
 
-    app.changeAge();
+  describe('changeAge()', () => {
+    it('should change correctly', () => {
+      expect(app.age).toBe(1);
 
-    expect(app.age).toBe(12);
-  });
+      app.changeAge();
+
+      expect(app.age).toBe(12);
+    });
+
+    xit('should be defined', () => {
+      expect(app.changeAge()).toBeDefined();
+    });
+
+  })
 
   it('name() should be a string', () => {
     expect(app.name).not.toBeInstanceOf(Number);
