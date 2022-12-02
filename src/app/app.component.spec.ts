@@ -2,6 +2,14 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 
+declare global {
+  namespace jasmine {
+    interface Matchers<T> {
+      toBeCorrect(): void;
+    }
+  }
+}
+
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let app: AppComponent;
@@ -16,7 +24,26 @@ describe('AppComponent', () => {
 
     fixture = TestBed.createComponent(AppComponent);
     app = fixture.componentInstance;
+  });
 
+  beforeEach(() => {
+    jasmine.addMatchers({
+      toBeCorrect: () => {
+
+        return {
+          compare: (actual: number, expected: number) => {
+            let response: { pass: boolean, message: string } = {} as any;
+            response.pass = (actual < 5 && actual > 2);
+            response.message = 'ca ne fonctionne pas';
+            return response;
+          }
+        }
+      }
+    })
+  })
+
+  it('should be check if smaller than 5 and greater than 2', () => {
+    expect(3).toBeCorrect()
   });
 
   it('changeAge() should change correctly', () => {
