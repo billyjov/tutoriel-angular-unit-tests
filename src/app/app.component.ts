@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { CheckerService } from './shared/services/checker/checker.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,10 @@ export class AppComponent {
   title = 'unit-test';
   public age: number = 1;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private checkerService: CheckerService
+  ) { }
 
 
   public get name(): string {
@@ -21,10 +25,12 @@ export class AppComponent {
     this.age = 12;
   }
 
-  public calc(a: number, b: number): number {
+  public calc(a: any, b: number): number {
+    if (this.checkerService.isValidNumber(a)) {
+      return this.multiply(a, b);
+    }
 
-
-    return this.multiply(a, b);
+    throw new Error('sorry it is not a valid number');
   }
 
   private multiply(a: number, b: number): number {
