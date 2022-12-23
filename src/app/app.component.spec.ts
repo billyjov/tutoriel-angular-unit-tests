@@ -47,6 +47,15 @@ describe('AppComponent', () => {
   });
 
 
+  describe('calc(...)', () => {
+    it('should multiply two number correctly', () => {
+      const result = app.calc(2, 4);
+
+      expect(result).toBe(8);
+    });
+  });
+
+
   describe('changeAge()', () => {
     it('should change correctly', () => {
       expect(app.age).toBe(1);

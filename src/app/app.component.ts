@@ -20,4 +20,14 @@ export class AppComponent {
   public changeAge(): void {
     this.age = 12;
   }
+
+  public calc(a: number, b: number): number {
+
+
+    return this.multiply(a, b);
+  }
+
+  private multiply(a: number, b: number): number {
+    return a * b;
+  }
 }
