@@ -1,6 +1,7 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { CheckerService } from './shared/services/checker/checker.service';
 
 declare global {
   namespace jasmine {
@@ -13,6 +14,7 @@ declare global {
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let app: AppComponent;
+  let checkerService: CheckerService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -39,7 +41,9 @@ describe('AppComponent', () => {
           }
         }
       }
-    })
+    });
+
+    checkerService = TestBed.inject(CheckerService);
   })
 
   it('should be check if smaller than 5 and greater than 2', () => {
@@ -52,6 +56,18 @@ describe('AppComponent', () => {
       const result = app.calc(2, 4);
 
       expect(result).toBe(8);
+    });
+
+    it('should verify that isValidNumber was called', () => {
+      let spyIsValidNumber: jasmine.Spy;
+
+      spyIsValidNumber = spyOn(checkerService, 'isValidNumber').and.returnValue(true);
+      const result = app.calc(2, 4);
+
+      expect(result).toBe(8);
+      expect(spyIsValidNumber).toHaveBeenCalled();
+      expect(spyIsValidNumber).toHaveBeenCalledTimes(1);
+      expect(spyIsValidNumber).toHaveBeenCalledWith(2);
     });
   });
 
