@@ -60,6 +60,7 @@ describe('AppComponent', () => {
 
     it('should verify that isValidNumber was called', () => {
       let spyIsValidNumber: jasmine.Spy;
+      const spyAge: jasmine.Spy = spyOnProperty(checkerService, 'age', 'get');
 
       spyIsValidNumber = spyOn(checkerService, 'isValidNumber').and.returnValue(true);
       const result = app.calc(2, 4);
@@ -67,7 +68,10 @@ describe('AppComponent', () => {
       expect(result).toBe(8);
       expect(spyIsValidNumber).toHaveBeenCalled();
       expect(spyIsValidNumber).toHaveBeenCalledTimes(1);
-      expect(spyIsValidNumber).toHaveBeenCalledWith(2);
+      expect(spyAge).toHaveBeenCalled();
+
+      expect(spyIsValidNumber).toHaveBeenCalledWith(jasmine.any(Number));
+      expect(spyIsValidNumber).not.toHaveBeenCalledWith(jasmine.any(Array));
     });
   });
 

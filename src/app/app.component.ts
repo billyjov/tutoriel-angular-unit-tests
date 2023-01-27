@@ -27,6 +27,7 @@ export class AppComponent {
 
   public calc(a: any, b: number): number {
     if (this.checkerService.isValidNumber(a)) {
+      const age = this.checkerService.age;
       return this.multiply(a, b);
     }
 
