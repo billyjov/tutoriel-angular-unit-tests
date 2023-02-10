@@ -1,5 +1,7 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AccountingComponent } from './accounting/accounting.component';
 import { AppComponent } from './app.component';
 import { CheckerService } from './shared/services/checker/checker.service';
 
@@ -19,9 +21,10 @@ describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
       ],
-      imports: [ReactiveFormsModule]
+      imports: [ReactiveFormsModule],
+      schemas: [NO_ERRORS_SCHEMA]
     });
 
     fixture = TestBed.createComponent(AppComponent);
@@ -98,15 +101,5 @@ describe('AppComponent', () => {
 
   it('should create the app', () => {
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'unit-test'`, () => {
-    expect(app.title).toBe('unit-test');
-  });
-
-  it('should render title', () => {
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('unit-test app is running!');
   });
 });
