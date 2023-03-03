@@ -1,7 +1,7 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AccountingComponent } from './accounting/accounting.component';
+import { By } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { CheckerService } from './shared/services/checker/checker.service';
 
@@ -47,7 +47,13 @@ describe('AppComponent', () => {
     });
 
     checkerService = TestBed.inject(CheckerService);
-  })
+  });
+
+  it('should check if app-accounting is present', () => {
+    const elements = fixture.debugElement;
+    const accounting = elements.query(By.css('app-accounting'));
+    expect(accounting).toBeTruthy();
+  });
 
   it('should be check if smaller than 5 and greater than 2', () => {
     expect(3).toBeCorrect()
