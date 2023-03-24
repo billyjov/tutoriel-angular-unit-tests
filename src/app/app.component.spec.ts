@@ -55,13 +55,26 @@ describe('AppComponent', () => {
     expect(accounting).toBeTruthy();
   });
 
-  it('should add data binding correctly', () => {
+  it('should add data binding correctly @Input()', () => {
     const elements = fixture.debugElement;
     const accounting = elements.query(By.css('app-accounting'));
 
     fixture.detectChanges();
 
     expect(accounting.properties['amount']).toBe(7)
+  });
+
+
+  it('should verify amount change @Output()', () => {
+
+    expect(app.currentAmount).toBe(0);
+
+    const elements = fixture.debugElement;
+    const accounting = elements.query(By.css('app-accounting'));
+
+    accounting.triggerEventHandler('amountChange', 10);
+
+    expect(app.currentAmount).toBe(10);
   });
 
   it('should be check if smaller than 5 and greater than 2', () => {

@@ -10,11 +10,17 @@ import { CheckerService } from './shared/services/checker/checker.service';
 export class AppComponent {
   title = 'unit-test';
   public age: number = 1;
+  public currentAmount: number = 0;
 
   constructor(
     private fb: FormBuilder,
     private checkerService: CheckerService
   ) { }
+
+
+  public handleAmountChange(amount: number): void {
+    this.currentAmount = amount;
+  }
 
 
   public get name(): string {

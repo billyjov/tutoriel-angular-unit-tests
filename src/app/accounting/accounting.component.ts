@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AccountingService } from '../shared/services/accounting/accounting.service';
 
 @Component({
@@ -9,7 +9,10 @@ import { AccountingService } from '../shared/services/accounting/accounting.serv
 export class AccountingComponent implements OnInit {
 
   @Input()
-  amount!: number
+  amount!: number;
+
+  @Output()
+  amountChange: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private accountingService: AccountingService) { }
 
