@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AccountingService } from '../shared/services/accounting/accounting.service';
 
 @Component({
@@ -7,6 +7,9 @@ import { AccountingService } from '../shared/services/accounting/accounting.serv
   styleUrls: ['./accounting.component.css']
 })
 export class AccountingComponent implements OnInit {
+
+  @Input()
+  amount!: number
 
   constructor(private accountingService: AccountingService) { }
 
