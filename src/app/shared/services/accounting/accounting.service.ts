@@ -7,4 +7,9 @@ import { HttpClient } from '@angular/common/http';
 export class AccountingService {
 
   constructor(private http: HttpClient) { }
+
+
+  public getFullAmount(): number {
+    return 120;
+  }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { AccountingService } from './shared/services/accounting/accounting.service';
 import { CheckerService } from './shared/services/checker/checker.service';
 
 @Component({
@@ -14,9 +15,14 @@ export class AppComponent {
 
   constructor(
     private fb: FormBuilder,
-    private checkerService: CheckerService
+    private checkerService: CheckerService,
+    private accountingService: AccountingService
   ) { }
 
+
+  public getInitialFullAmount(): number {
+    return this.accountingService.getFullAmount();
+  }
 
   public handleAmountChange(amount: number): void {
     this.currentAmount = amount;

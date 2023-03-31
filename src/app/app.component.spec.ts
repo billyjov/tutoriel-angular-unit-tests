@@ -1,8 +1,9 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {  NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
+import { findChildComponent } from './shared/helpers/testing-helpers';
 import { CheckerService } from './shared/services/checker/checker.service';
 
 declare global {
@@ -12,6 +13,7 @@ declare global {
     }
   }
 }
+
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -23,7 +25,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
       ],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, HttpClientTestingModule],
       schemas: [NO_ERRORS_SCHEMA]
     });
 
@@ -49,15 +51,17 @@ describe('AppComponent', () => {
     checkerService = TestBed.inject(CheckerService);
   });
 
+  it('should check initial amount value from accounting', () => {
+    expect(app.getInitialFullAmount()).toEqual(120);
+  });
+
   it('should check if app-accounting is present', () => {
-    const elements = fixture.debugElement;
-    const accounting = elements.query(By.css('app-accounting'));
+    const accounting = findChildComponent<AppComponent>(fixture, 'app-accounting');
     expect(accounting).toBeTruthy();
   });
 
   it('should add data binding correctly @Input()', () => {
-    const elements = fixture.debugElement;
-    const accounting = elements.query(By.css('app-accounting'));
+    const accounting = findChildComponent<AppComponent>(fixture, 'app-accounting');
 
     fixture.detectChanges();
 
@@ -69,8 +73,7 @@ describe('AppComponent', () => {
 
     expect(app.currentAmount).toBe(0);
 
-    const elements = fixture.debugElement;
-    const accounting = elements.query(By.css('app-accounting'));
+    const accounting = findChildComponent<AppComponent>(fixture, 'app-accounting');
 
     accounting.triggerEventHandler('amountChange', 10);
 
