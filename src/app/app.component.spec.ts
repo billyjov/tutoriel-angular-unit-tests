@@ -36,7 +36,17 @@ describe('AppComponent', () => {
       providers: [
         {
           provide: AccountingService,
-          useClass: AccountingServiceMock
+          // useClass: AccountingServiceMock
+          useFactory: () => {
+            return {
+              getFullAmount: () => {
+                const a = 12;
+
+                return a;
+              },
+              getInitialAmount: () => 12,
+            }
+          }
         }
       ],
       imports: [ReactiveFormsModule],
@@ -68,7 +78,7 @@ describe('AppComponent', () => {
 
   it('should check initial amount value from accounting', () => {
     console.log(accountingService);
-    expect(app.getInitialFullAmount()).toEqual(150);
+    expect(app.getInitialFullAmount()).toEqual(12);
   });
 
   it('should check if app-accounting is present', () => {
