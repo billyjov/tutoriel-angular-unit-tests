@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { findChildComponent } from './shared/helpers/testing-helpers';
 import { CheckerService } from './shared/services/checker/checker.service';
+import { AccountingService } from './shared/services/accounting/accounting.service';
 
 declare global {
   namespace jasmine {
@@ -14,18 +15,31 @@ declare global {
   }
 }
 
+export class AccountingServiceMock {
+  public getFullAmount(): number {
+    return 150;
+  }
+}
+
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let app: AppComponent;
   let checkerService: CheckerService;
+  let accountingService: AccountingService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
       ],
-      imports: [ReactiveFormsModule, HttpClientTestingModule],
+      providers: [
+        {
+          provide: AccountingService,
+          useClass: AccountingServiceMock
+        }
+      ],
+      imports: [ReactiveFormsModule],
       schemas: [NO_ERRORS_SCHEMA]
     });
 
@@ -49,10 +63,12 @@ describe('AppComponent', () => {
     });
 
     checkerService = TestBed.inject(CheckerService);
+    accountingService = TestBed.inject(AccountingService);
   });
 
   it('should check initial amount value from accounting', () => {
-    expect(app.getInitialFullAmount()).toEqual(120);
+    console.log(accountingService);
+    expect(app.getInitialFullAmount()).toEqual(150);
   });
 
   it('should check if app-accounting is present', () => {

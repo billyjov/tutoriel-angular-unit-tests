@@ -12,4 +12,8 @@ export class AccountingService {
   public getFullAmount(): number {
     return 120;
   }
+
+  public getInitialAmount(): number {
+    return 0;
+  }
 }
